@@ -24,7 +24,9 @@ public enum EventType {
     /** Converts text from the CSV file (case-insensitive) to an EventType. */
     public static EventType fromLabel(String text) {
         for (EventType t : values()) {
-            if (t.label.equalsIgnoreCase(text.trim())) return t;
+            if (t.label.equalsIgnoreCase(text == null ? "" : text.trim())) {
+                return t;
+            }
         }
         throw new IllegalArgumentException("Unknown event type: " + text);
     }
@@ -32,11 +34,11 @@ public enum EventType {
     /** Builds the correct Event subclass for this type. */
     public Event create(int id, String title, LocalDate date, LocalTime time,
                         String location, String description, String organizer) {
-        return switch (this) {
-            case MEETING   -> new MeetingEvent(id, title, date, time, location, description, organizer);
-            case WORKSHOP  -> new WorkshopEvent(id, title, date, time, location, description, organizer);
-            case SOCIAL    -> new SocialEvent(id, title, date, time, location, description, organizer);
-            case VOLUNTEER -> new VolunteerEvent(id, title, date, time, location, description, organizer);
-        };
+        switch (this) {
+            case MEETING:   return new MeetingEvent(id, title, date, time, location, description, organizer);
+            case WORKSHOP:  return new WorkshopEvent(id, title, date, time, location, description, organizer);
+            case SOCIAL:    return new SocialEvent(id, title, date, time, location, description, organizer);
+            default:        return new VolunteerEvent(id, title, date, time, location, description, organizer);
+        }
     }
 }

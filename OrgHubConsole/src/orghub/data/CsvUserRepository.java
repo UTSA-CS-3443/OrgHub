@@ -19,6 +19,9 @@ public class CsvUserRepository extends CsvRepository<User> {
 
     @Override
     protected User fromFields(List<String> f) {
+        if (f.size() != 4) {
+            throw new IllegalArgumentException("expected 4 columns but found " + f.size());
+        }
         return User.create(Integer.parseInt(f.get(0).trim()), f.get(1), f.get(2), f.get(3));
     }
 

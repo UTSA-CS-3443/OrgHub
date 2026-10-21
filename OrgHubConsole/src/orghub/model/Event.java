@@ -17,10 +17,12 @@ import java.util.Locale;
  */
 public abstract class Event implements Comparable<Event> {
 
-    /** Display/storage format for times, e.g. "6:00 PM"; also accepts "6:00 pm" as input. */
+    /** Display/storage format for times, e.g. "6:00 PM". */
+    private static final DateTimeFormatter TIME_OUT = DateTimeFormatter.ofPattern("h:mm a", Locale.US);
+    /** Accepts "6:00 PM", "6:00 pm" when reading input. */
     private static final DateTimeFormatter TIME_12H = new DateTimeFormatterBuilder()
             .parseCaseInsensitive().appendPattern("h:mm a").toFormatter(Locale.US);
-    /** Accepts 24-hour "18:00" as input. */
+    /** Accepts 24-hour "18:00" when reading input. */
     private static final DateTimeFormatter TIME_24H = DateTimeFormatter.ofPattern("H:mm");
 
     private final int id;
@@ -60,7 +62,7 @@ public abstract class Event implements Comparable<Event> {
     public String getOrganizer()   { return organizer; }
 
     /** The time formatted the same way it is stored in events.csv. */
-    public String getTimeText()    { return time.format(TIME_12H); }
+    public String getTimeText()    { return time.format(TIME_OUT); }
 
     // ---- validating setters (final so the constructor can safely call them) ----
 

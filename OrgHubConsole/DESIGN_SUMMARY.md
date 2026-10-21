@@ -9,7 +9,7 @@ javac -d out $(find src -name "*.java")
 java -cp out orghub.Main
 ```
 (In IntelliJ: mark `src` as Sources Root, run `orghub.Main` with the project folder as the working directory.)
-Log in with an email from `../data/members.csv`, e.g. `clara@example.edu` (Officer) or `jordan@example.edu` (Member).
+Log in with an email from `data/members.csv`, e.g. `clara@example.edu` (Officer) or `jordan@example.edu` (Member).
 
 ## Package overview
 ```

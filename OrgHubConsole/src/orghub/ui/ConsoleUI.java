@@ -9,9 +9,9 @@ import orghub.model.User;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 /**
  * The presentation layer. It only prints menus and reads input; every rule
@@ -87,10 +87,11 @@ public class ConsoleUI {
         System.out.println(" DASHBOARD - " + organization.getName() + "   |   " + currentUser.getName()
                 + " (" + currentUser.getRole() + ")");
         System.out.println(LINE);
-        String counts = events.countByType().entrySet().stream()
-                .map(c -> c.getKey().getLabel() + ": " + c.getValue())
-                .collect(Collectors.joining("   "));
-        System.out.println(" Total events: " + events.getEventCount() + "   (" + counts + ")");
+        StringBuilder counts = new StringBuilder();
+        for (Map.Entry<EventType, Integer> c : events.countByType().entrySet()) {
+            counts.append(c.getKey().getLabel()).append(": ").append(c.getValue()).append("   ");
+        }
+        System.out.println(" Total events: " + events.getEventCount() + "   (" + counts.toString().trim() + ")");
         System.out.println(" Next up:");
         List<Event> next = events.getUpcoming(3);
         if (next.isEmpty()) System.out.println("   (no upcoming events)");
@@ -132,9 +133,10 @@ public class ConsoleUI {
     private void searchEvents() {
         String keyword = ask("Keyword in title/location/organizer (blank for any)", "");
         System.out.println("Type filter: 0. Any");
-        printTypes();
-        int choice = askInt("Choose type", 0, EventType.values().length);
-        EventType type = choice == 0 ? null : EventType.values()[choice - 1];
+        EventType[] types = EventType.values();
+        for (int i = 0; i < types.length; i++) System.out.println("  " + (i + 1) + ". " + types[i].getLabel());
+        int choice = askInt("Choose type", 0, types.length);
+        EventType type = choice == 0 ? null : types[choice - 1];
         viewEvents(events.search(keyword, type), "Search results");
     }
 
@@ -209,21 +211,20 @@ public class ConsoleUI {
     }
 
     private EventType askType(EventType current) {
-        printTypes();
-        EventType[] types = EventType.values();
-        String suffix = current == null ? "" : " [" + current.getLabel() + "]";
-        while (true) {
-            String text = ask("Event type" + suffix + " (1-" + types.length + ")", "");
-            if (text.isBlank() && current != null) return current;
-            int n = toInt(text);
-            if (n >= 1 && n <= types.length) return types[n - 1];
-            System.out.println("Enter a number from 1 to " + types.length + ".");
-        }
-    }
-
-    private void printTypes() {
         EventType[] types = EventType.values();
         for (int i = 0; i < types.length; i++) System.out.println("  " + (i + 1) + ". " + types[i].getLabel());
+        while (true) {
+            String prompt = current == null ? "Event type (1-" + types.length + ")" : "Event type [" + current.getLabel() + "] (1-" + types.length + ")";
+            String text = ask(prompt, "");
+            if (text.isBlank() && current != null) return current;
+            try {
+                int n = Integer.parseInt(text.trim());
+                if (n >= 1 && n <= types.length) return types[n - 1];
+            } catch (NumberFormatException ignored) {
+                // fall through to the message below
+            }
+            System.out.println("Enter a number from 1 to " + types.length + ".");
+        }
     }
 
     // ============================== Delete ==============================
@@ -259,15 +260,10 @@ public class ConsoleUI {
 
     /** Turns typed text into an event lookup; non-numbers simply find nothing. */
     private Optional<Event> lookup(String idText) {
-        return events.findById(toInt(idText));
-    }
-
-    /** Parses a whole number, or returns -1 if the text is not one. */
-    private static int toInt(String text) {
         try {
-            return Integer.parseInt(text.trim());
+            return events.findById(Integer.parseInt(idText.trim()));
         } catch (NumberFormatException e) {
-            return -1;
+            return Optional.empty();
         }
     }
 
@@ -285,8 +281,12 @@ public class ConsoleUI {
     private int askInt(String label, int min, int max) {
         while (true) {
             String text = ask(label + " (" + min + "-" + max + ")", "");
-            int n = toInt(text);
-            if (n >= min && n <= max) return n;
+            try {
+                int n = Integer.parseInt(text);
+                if (n >= min && n <= max) return n;
+            } catch (NumberFormatException ignored) {
+                // fall through to the message below
+            }
             System.out.println("Please enter a number from " + min + " to " + max + ".");
         }
     }

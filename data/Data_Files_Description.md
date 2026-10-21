@@ -5,7 +5,7 @@ All files live in the `data/` folder and are read when the program starts. The p
 | File | Type | What it is used for | Read / written by |
 |---|---|---|---|
 | `events.csv` | CSV | Stores every organization event so events survive closing the app. One row per event. | Read on startup; rewritten after every create, update or delete (`CsvEventRepository`) |
-| `../../data/members.csv` | CSV | Stores the people in the organization and their role (Officer or Member). The role decides who may create/update/delete events. | Read on startup (`CsvUserRepository`) |
+| `members.csv` | CSV | Stores the people in the organization and their role (Officer or Member). The role decides who may create/update/delete events. | Read on startup (`CsvUserRepository`) |
 | `organization.txt` | Text (`key=value`) | Basic organization info shown on the dashboard: organization name and contact email. | Read on startup (`Organization.load`) |
 
 ## events.csv
@@ -33,6 +33,6 @@ Header: `id,name,email,role` – `role` is `Officer` or `Member`. The email is w
 Lines starting with `#` are comments. Keys: `name` and `contactEmail`.
 
 ## Robustness
-- If `events.csv` or `../../data/members.csv` is missing, it is created with just its header row.
+- If `events.csv` or `members.csv` is missing, it is created with just its header row.
 - A malformed row is skipped and a warning is printed at startup; the rest of the file still loads.
 - Saving writes to a temporary file first and then replaces the real file, so a crash mid-save cannot corrupt the data.

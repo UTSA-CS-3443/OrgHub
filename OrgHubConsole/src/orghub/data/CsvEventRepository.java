@@ -20,6 +20,9 @@ public class CsvEventRepository extends CsvRepository<Event> {
 
     @Override
     protected Event fromFields(List<String> f) {
+        if (f.size() != 8) {
+            throw new IllegalArgumentException("expected 8 columns but found " + f.size());
+        }
         return EventType.fromLabel(f.get(6)).create(
                 Integer.parseInt(f.get(0).trim()), f.get(1),
                 Event.parseDate(f.get(2)), Event.parseTime(f.get(3)),

@@ -7,11 +7,11 @@ import orghub.model.EventType;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Application logic for events (the CRUD operations from the proposal).
@@ -35,7 +35,9 @@ public class EventController {
 
     /** All events in chronological order. */
     public List<Event> getAllEvents() {
-        return events.stream().sorted().collect(Collectors.toList());
+        List<Event> sorted = new ArrayList<>(events);
+        Collections.sort(sorted);
+        return sorted;
     }
 
     public Optional<Event> findById(int id) {
@@ -45,19 +47,23 @@ public class EventController {
     /** Case-insensitive match on title, location or organizer; type may be null for "any". */
     public List<Event> search(String keyword, EventType type) {
         String k = keyword == null ? "" : keyword.trim().toLowerCase();
-        return getAllEvents().stream()
-                .filter(e -> type == null || e.getType() == type)
-                .filter(e -> (e.getTitle() + " " + e.getLocation() + " " + e.getOrganizer()).toLowerCase().contains(k))
-                .collect(Collectors.toList());
+        List<Event> result = new ArrayList<>();
+        for (Event e : getAllEvents()) {
+            boolean typeOk = type == null || e.getType() == type;
+            String haystack = (e.getTitle() + " " + e.getLocation() + " " + e.getOrganizer()).toLowerCase();
+            if (typeOk && haystack.contains(k)) result.add(e);
+        }
+        return result;
     }
 
     /** The next events happening today or later. */
     public List<Event> getUpcoming(int limit) {
         LocalDate today = LocalDate.now();
-        return getAllEvents().stream()
-                .filter(e -> !e.getDate().isBefore(today))
-                .limit(limit)
-                .collect(Collectors.toList());
+        List<Event> upcoming = new ArrayList<>();
+        for (Event e : getAllEvents()) {
+            if (!e.getDate().isBefore(today) && upcoming.size() < limit) upcoming.add(e);
+        }
+        return upcoming;
     }
 
     public Map<EventType, Integer> countByType() {
@@ -93,7 +99,9 @@ public class EventController {
             throw new IllegalArgumentException("No event with ID " + id + ".");
         }
         Event updated = build(id, title, date, time, location, description, type, organizer);
-        commit(events.stream().map(e -> e.getId() == id ? updated : e).collect(Collectors.toList()));
+        List<Event> next = new ArrayList<>();
+        for (Event e : events) next.add(e.getId() == id ? updated : e);
+        commit(next);
         return updated;
     }
 
@@ -101,9 +109,10 @@ public class EventController {
 
     /** @return true if an event was removed, false if the id did not exist */
     public boolean deleteEvent(int id) throws IOException {
-        if (findById(id).isEmpty()) return false;
-        commit(events.stream().filter(e -> e.getId() != id).collect(Collectors.toList()));
-        return true;
+        List<Event> next = new ArrayList<>(events);
+        boolean removed = next.removeIf(e -> e.getId() == id);
+        if (removed) commit(next);
+        return removed;
     }
 
     // ---------- helpers ----------

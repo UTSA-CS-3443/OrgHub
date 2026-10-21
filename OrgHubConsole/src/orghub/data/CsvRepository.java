@@ -24,7 +24,7 @@ public abstract class CsvRepository<T> implements Repository<T> {
     /** Column names, written as the first line of the file. */
     protected abstract String[] header();
 
-    /** Builds one object from a row that already has the right number of columns (throw RuntimeException if bad). */
+    /** Builds one object from the columns of a row (throw RuntimeException if the row is bad). */
     protected abstract T fromFields(List<String> fields);
 
     /** The columns for one object, in header order. */
@@ -47,12 +47,7 @@ public abstract class CsvRepository<T> implements Repository<T> {
         for (int i = 1; i < lines.size(); i++) {           // line 0 is the header
             if (lines.get(i).isBlank()) continue;
             try {
-                List<String> fields = CsvUtil.split(lines.get(i));
-                if (fields.size() != header().length) {
-                    throw new IllegalArgumentException(
-                            "expected " + header().length + " columns but found " + fields.size());
-                }
-                items.add(fromFields(fields));
+                items.add(fromFields(CsvUtil.split(lines.get(i))));
             } catch (RuntimeException e) {
                 warnings.add(file.getFileName() + " line " + (i + 1) + " skipped: " + e.getMessage());
             }
@@ -64,7 +59,9 @@ public abstract class CsvRepository<T> implements Repository<T> {
     public void saveAll(List<T> items) throws IOException {
         List<String> lines = new ArrayList<>();
         lines.add(CsvUtil.join(header()));
-        items.forEach(item -> lines.add(CsvUtil.join(toFields(item))));
+        for (T item : items) {
+            lines.add(CsvUtil.join(toFields(item)));
+        }
         if (file.getParent() != null) Files.createDirectories(file.getParent());
         // Write to a temp file first so a crash mid-write cannot corrupt the real file.
         Path temp = file.resolveSibling(file.getFileName() + ".tmp");
