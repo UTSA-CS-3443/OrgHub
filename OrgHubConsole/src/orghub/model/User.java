@@ -7,20 +7,23 @@ package orghub.model;
 public abstract class User {
 
     private final int id;
-    private final String name;
+    private final String firstName;
+    private final String lastName;
     private final String email;
 
-    protected User(int id, String name, String email) {
-        if (name == null || name.isBlank() || email == null || email.isBlank()) {
+    protected User(int id, String firstName, String lastName, String email) {
+        if (firstNamename == null || firstName.isBlank() || lastName == null || lastName.isBlank() || email == null || email.isBlank()) {
             throw new IllegalArgumentException("Name and email are required.");
         }
         this.id = id;
-        this.name = name.trim();
+        this.firstName = firstName.trim();
+        this.lastName = lastName.trim();
         this.email = email.trim();
     }
 
     public int getId()       { return id; }
-    public String getName()  { return name; }
+    public String getFirstName()  { return firstName; }
+    public String getLastName() { return lastName; }
     public String getEmail() { return email; }
 
     /** "Officer" or "Member" - also the value stored in members.csv. */
@@ -30,15 +33,15 @@ public abstract class User {
     public abstract boolean canManageEvents();
 
     /** Builds the right subclass from the role text in members.csv. */
-    public static User create(int id, String name, String email, String role) {
+    public static User create(int id, String firstName, String lastName, String email, String role) {
         String r = role == null ? "" : role.trim();
-        if (r.equalsIgnoreCase("Officer")) return new Officer(id, name, email);
+        if (r.equalsIgnoreCase("Officer")) return new Officer(id, firstName, lastName, email);
         if (r.equalsIgnoreCase("Member"))  return new Member(id, name, email);
         throw new IllegalArgumentException("Unknown role: " + role);
     }
 
     public String[] toCsvFields() {
-        return new String[]{String.valueOf(id), name, email, getRole()};
+        return new String[]{String.valueOf(id), firstName, lastName, email, getRole()};
     }
 
     @Override
