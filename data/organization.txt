@@ -1,3 +1,0 @@
-# Basic organization information (read with java.util.Properties)
-name=Computer Science Society
-contactEmail=css@example.edu

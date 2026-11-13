@@ -1,5 +1,7 @@
-id,name,email,role
-1,Clara Villatoro,clara@example.edu,Officer
-2,Maya Patel,maya@example.edu,Officer
-3,Jordan Lee,jordan@example.edu,Member
-4,Alex Morgan,alex@example.edu,Member
+1,Clara Villatoro,clara@example.edu,1,Admin,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+2,Maya Patel,maya@example.edu,1,Officer,
+3,Jordan Lee,jordan@example.edu,1,Member,
+5,Clara Villatoro,clara@example.edu,2,Member,8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
+6,Priya Shah,priya@example.edu,2,Admin,
+7,Sam Rivera,sam@example.edu,3,Admin,
+8,Jordan Lee,jordan@example.edu,3,Officer,
