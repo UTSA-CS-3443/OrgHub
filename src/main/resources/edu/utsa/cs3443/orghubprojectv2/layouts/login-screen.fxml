@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane fx:controller="edu.utsa.cs3443.orghubprojectv2.controller.LoginScreenController" prefHeight="800.0" prefWidth="1280.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" percentWidth="44.0" />
+      <ColumnConstraints hgrow="ALWAYS" percentWidth="56.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints vgrow="ALWAYS" />
+   </rowConstraints>
+   <children>
+
+      <!-- ============ LEFT: brand panel ============ -->
+      <VBox styleClass="brand-panel" GridPane.columnIndex="0">
+         <padding>
+            <Insets bottom="32.0" left="48.0" right="48.0" top="48.0" />
+         </padding>
+         <children>
+            <!-- Logo row -->
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/orghub-logo-icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="brand-name" text="OrgHub" />
+               </children>
+            </HBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Hero text -->
+            <Label styleClass="eyebrow-gold" text="STUDENT ORGANIZATION MANAGEMENT" />
+            <VBox>
+               <padding>
+                  <Insets bottom="14.0" top="14.0" />
+               </padding>
+               <children>
+                  <Label styleClass="hero" text="Every event." />
+                  <Label styleClass="hero" text="One place." />
+               </children>
+            </VBox>
+            <Label maxWidth="400.0" styleClass="hero-sub" text="OrgHub gives student organizations a simple home for events, members, and the details that keep everyone in the loop." wrapText="true" />
+
+            <!-- Feature bullets -->
+            <VBox spacing="14.0">
+               <padding>
+                  <Insets top="24.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="12.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label styleClass="feature-text" text="Create, update, and retire events in seconds" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="12.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label styleClass="feature-text" text="See every organization on one color-coded dashboard" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="12.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label styleClass="feature-text" text="Keep member lists current without a spreadsheet" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <Label styleClass="brand-footer" text="Ctrl Alt Elite  /  CS 3443  /  The University of Texas at San Antonio" />
+         </children>
+      </VBox>
+
+      <!-- ============ RIGHT: form panel ============ -->
+      <StackPane alignment="TOP_CENTER" styleClass="form-panel" GridPane.columnIndex="1">
+         <children>
+            <VBox maxWidth="420.0" StackPane.alignment="TOP_CENTER">
+               <StackPane.margin>
+                  <Insets top="48.0" />
+               </StackPane.margin>
+               <children>
+                  <Label styleClass="eyebrow-green" text="WELCOME BACK" />
+                  <Label styleClass="title" text="Sign in to OrgHub" />
+                  <Label styleClass="subtitle" text="Manage your organization's events, members, and details." wrapText="true" />
+
+                  <Label styleClass="field-label" text="Email address">
+                     <VBox.margin>
+                        <Insets bottom="6.0" top="24.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="emailField" promptText="you@example.edu" styleClass="input" />
+
+                  <Label styleClass="field-label" text="Password">
+                     <VBox.margin>
+                        <Insets bottom="6.0" top="16.0" />
+                     </VBox.margin>
+                  </Label>
+                  <!-- StackPane so the eye button floats over the right end of the field -->
+                  <StackPane>
+                     <children>
+                        <PasswordField fx:id="passwordField" promptText="Password" styleClass="input" />
+                        <Button fx:id="togglePasswordButton" focusTraversable="false" mnemonicParsing="false" onAction="#handleTogglePassword" styleClass="icon-button" text="Show" StackPane.alignment="CENTER_RIGHT">
+                           <StackPane.margin>
+                              <Insets right="8.0" />
+                           </StackPane.margin>
+                        </Button>
+                     </children>
+                  </StackPane>
+
+                  <Button fx:id="signInButton" defaultButton="true" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleSignIn" prefHeight="44.0" styleClass="primary-button" text="Sign in">
+                     <VBox.margin>
+                        <Insets top="16.0" />
+                     </VBox.margin>
+                  </Button>
+
+                  <HBox alignment="CENTER_LEFT">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label styleClass="muted" text="Just exploring?" />
+                        <Hyperlink fx:id="demoLink" onAction="#handleDemo" styleClass="link-bold" text="Use demo account" />
+                     </children>
+                  </HBox>
+
+                  <Separator>
+                     <VBox.margin>
+                        <Insets bottom="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Separator>
+
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label styleClass="muted" text="New to OrgHub?" />
+                        <Hyperlink fx:id="createAccountLink" onAction="#handleCreateAccount" styleClass="link-bold" text="Create an account" />
+                     </children>
+                  </HBox>
+
+                  <Label styleClass="footnote" text="File-based data. Your organization's information stays in the data folder." wrapText="true">
+                     <VBox.margin>
+                        <Insets top="16.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</GridPane>

@@ -1,0 +1,381 @@
+/* =====================================================
+   OrgHub - shared stylesheet (login, register, overview)
+   ===================================================== */
+
+/* ---------- Palette & base ---------- */
+.root {
+    -brand-dark: #1a3a32;
+    -brand-green: #1a6b52;
+    -brand-green-hover: #155a45;
+    -brand-green-press: #104a39;
+    -brand-gold: #e8b66f;
+    -surface: #fefdf9;
+    -surface-white: #ffffff;
+    -border: #e1e6e3;
+    -text-dark: #1a3a32;
+    -text-muted: #6b7a75;
+    -text-faint: #9aa7a2;
+    -tint-green: #dcebe6;
+
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: -surface;
+    -fx-focus-color: -brand-green;
+    -fx-faint-focus-color: transparent;
+}
+
+/* ---------- Shared text ---------- */
+.muted {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 12px;
+}
+.footnote {
+    -fx-text-fill: -text-faint;
+    -fx-font-size: 11px;
+}
+.eyebrow-green {
+    -fx-text-fill: -brand-green;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.eyebrow-gold {
+    -fx-text-fill: -brand-gold;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.title {
+    -fx-text-fill: -text-dark;
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 0 6 0;
+}
+.page-title {
+    -fx-text-fill: -text-dark;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+.section-title {
+    -fx-text-fill: -text-dark;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+.subtitle {
+    -fx-text-fill: -text-muted;
+    -fx-font-size: 14px;
+}
+.field-label {
+    -fx-text-fill: -text-dark;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Links ---------- */
+.link-bold {
+    -fx-text-fill: -brand-green;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent;
+    -fx-padding: 0 0 0 5;
+}
+.link-bold:visited {
+    -fx-text-fill: -brand-green;
+}
+.link-bold:hover {
+    -fx-underline: true;
+}
+
+/* ---------- Inputs ---------- */
+.input {
+    -fx-background-color: -surface-white;
+    -fx-background-radius: 10;
+    -fx-border-color: -border;
+    -fx-border-radius: 10;
+    -fx-pref-height: 44px;
+    -fx-padding: 0 14 0 14;
+    -fx-font-size: 13px;
+    -fx-prompt-text-fill: #a3aeaa;
+}
+.input:focused {
+    -fx-border-color: -brand-green;
+    -fx-effect: dropshadow(gaussian, rgba(26, 107, 82, 0.25), 6, 0, 0, 0);
+}
+
+/* ComboBox used as an input (register) */
+.combo-box.input {
+    -fx-padding: 0;
+}
+.combo-box.input .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 14;
+    -fx-text-fill: -text-dark;
+}
+.combo-box.input .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 14 0 8;
+}
+.combo-box.input .arrow {
+    -fx-background-color: -text-muted;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: -surface-white;
+    -fx-background-radius: 10;
+    -fx-border-color: -border;
+    -fx-border-radius: 10;
+    -fx-padding: 4;
+}
+.combo-box-popup .list-cell {
+    -fx-background-radius: 6;
+    -fx-padding: 8 12 8 12;
+    -fx-text-fill: -text-dark;
+}
+.combo-box-popup .list-cell:filled:hover,
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: -tint-green;
+    -fx-text-fill: -text-dark;
+}
+
+/* ---------- Buttons ---------- */
+.primary-button {
+    -fx-background-color: -brand-green;
+    -fx-background-radius: 10;
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(26, 107, 82, 0.35), 8, 0, 0, 3);
+}
+.primary-button:hover {
+    -fx-background-color: -brand-green-hover;
+}
+.primary-button:pressed {
+    -fx-background-color: -brand-green-press;
+}
+
+.icon-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -text-muted;
+    -fx-cursor: hand;
+}
+.icon-button:hover {
+    -fx-text-fill: -text-dark;
+}
+
+/* ---------- Separators ---------- */
+.separator .line {
+    -fx-border-color: -border;
+    -fx-border-width: 1 0 0 0;
+}
+
+/* =====================================================
+   Login / Register: brand + form panels
+   ===================================================== */
+.brand-panel {
+    -fx-background-color: -brand-dark;
+}
+.form-panel {
+    -fx-background-color: -surface;
+}
+.brand-name {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+.hero {
+    -fx-text-fill: white;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
+.hero-sub {
+    -fx-text-fill: #d6e0dc;
+    -fx-font-size: 14px;
+    -fx-line-spacing: 4;
+}
+.feature-text {
+    -fx-text-fill: #e6ece9;
+    -fx-font-size: 13px;
+}
+.brand-footer {
+    -fx-text-fill: #8fa79f;
+    -fx-font-size: 11px;
+}
+
+/* =====================================================
+   Overview: sidebar
+   ===================================================== */
+.sidebar {
+    -fx-background-color: -brand-dark;
+}
+.sidebar .brand-name {
+    -fx-font-size: 22px;
+}
+.sidebar-divider .line {
+    -fx-border-color: rgba(255, 255, 255, 0.12);
+    -fx-border-width: 1 0 0 0;
+}
+
+.nav-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-text-fill: #b7c8c1;
+    -fx-font-size: 13px;
+    -fx-padding: 0 0 0 16;
+    -fx-cursor: hand;
+}
+.nav-item:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+    -fx-text-fill: white;
+}
+.nav-item-active,
+.nav-item-active:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.10);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent transparent transparent -brand-gold;
+    -fx-border-width: 0 0 0 3;
+}
+
+.avatar {
+    -fx-background-color: #d9743f;
+    -fx-background-radius: 17;
+}
+.avatar-text {
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+.user-name {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+.user-role {
+    -fx-text-fill: #8fa79f;
+    -fx-font-size: 11px;
+}
+.sidebar .icon-button {
+    -fx-text-fill: #8fa79f;
+}
+.sidebar .icon-button:hover {
+    -fx-text-fill: white;
+}
+
+/* =====================================================
+   Overview: main area
+   ===================================================== */
+.main-area {
+    -fx-background-color: -surface;
+}
+.top-bar {
+    -fx-background-color: -surface;
+}
+
+.org-switcher {
+    -fx-background-color: transparent;
+    -fx-font-weight: bold;
+}
+.org-switcher .list-cell {
+    -fx-text-fill: -text-dark;
+    -fx-font-weight: bold;
+    -fx-alignment: center-right;
+}
+.org-switcher .arrow-button {
+    -fx-background-color: transparent;
+}
+.org-switcher .arrow {
+    -fx-background-color: -text-muted;
+}
+
+/* Scroll area: transparent, thin scrollbar */
+.content-scroll,
+.content-scroll > .viewport,
+.content {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+.content-scroll {
+    -fx-padding: 0;
+    -fx-border-width: 0;
+}
+.content-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10;
+}
+.content-scroll .scroll-bar .increment-button,
+.content-scroll .scroll-bar .decrement-button {
+    -fx-padding: 0;
+    -fx-pref-height: 0;
+}
+.content-scroll .scroll-bar .increment-arrow,
+.content-scroll .scroll-bar .decrement-arrow {
+    -fx-padding: 0;
+    -fx-shape: " ";
+}
+.content-scroll .scroll-bar .thumb {
+    -fx-background-color: #cfd8d4;
+    -fx-background-radius: 5;
+}
+
+/* ---------- Date groups & event cards ---------- */
+.date-heading {
+    -fx-text-fill: -text-dark;
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+}
+
+.event-card {
+    -fx-background-color: -surface-white;
+    -fx-background-radius: 14;
+    -fx-border-color: -border;
+    -fx-border-radius: 14;
+    -fx-cursor: hand;
+}
+.event-card:hover {
+    -fx-background-color: #f9fbfa;
+    -fx-effect: dropshadow(gaussian, rgba(26, 58, 50, 0.10), 10, 0, 0, 3);
+}
+
+/* Default accent; override per organization from code with setStyle(...) */
+.card-accent {
+    -fx-background-color: -brand-green;
+    -fx-background-radius: 14 0 0 14;
+}
+
+.date-badge {
+    -fx-background-color: -tint-green;
+    -fx-background-radius: 12;
+}
+.date-badge-month {
+    -fx-text-fill: -brand-green;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
+.date-badge-day {
+    -fx-text-fill: -text-dark;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+/* Default tag; override colors per organization from code */
+.org-tag {
+    -fx-background-color: -tint-green;
+    -fx-background-radius: 6;
+    -fx-text-fill: -brand-green;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 8 4 8;
+}
+.event-title {
+    -fx-text-fill: -text-dark;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+    -fx-background-color: transparent;
+}
+.empty-title {
+    -fx-text-fill: -text-dark;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
