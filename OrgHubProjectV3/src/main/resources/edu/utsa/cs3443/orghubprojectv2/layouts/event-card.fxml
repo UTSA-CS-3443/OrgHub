@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- One event card. Load once per event and fill the labels from an event row.
+     cardAccent and orgTagLabel are where the per-organization color goes. -->
+
+<HBox fx:controller="edu.utsa.cs3443.orghubprojectv2.controller.EventCardController" fx:id="cardRoot" alignment="CENTER_LEFT" maxWidth="Infinity" styleClass="event-card" stylesheets="@app.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Region fx:id="cardAccent" maxWidth="4.0" minWidth="4.0" prefWidth="4.0" styleClass="card-accent" />
+      <HBox alignment="CENTER_LEFT" spacing="16.0" HBox.hgrow="ALWAYS">
+         <padding>
+            <Insets bottom="16.0" left="20.0" right="24.0" top="16.0" />
+         </padding>
+         <children>
+            <!-- Date badge -->
+            <VBox alignment="CENTER" minHeight="58.0" minWidth="54.0" prefHeight="58.0" prefWidth="54.0" styleClass="date-badge">
+               <children>
+                  <Label fx:id="monthLabel" styleClass="date-badge-month" text="NOV" />
+                  <Label fx:id="dayLabel" styleClass="date-badge-day" text="8" />
+               </children>
+            </VBox>
+
+            <!-- Info: minWidth=0 + hgrow lets long titles/locations shrink with an ellipsis -->
+            <VBox minWidth="0.0" spacing="8.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label fx:id="orgTagLabel" minWidth="-Infinity" styleClass="org-tag" text="ORGANIZATION" />
+                        <Label fx:id="titleLabel" minWidth="0.0" styleClass="event-title" text="Event title" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <children>
+                        <Label fx:id="typeLabel" minWidth="-Infinity" styleClass="muted" text="Meeting" />
+                        <Label minWidth="-Infinity" styleClass="muted" text="•" />
+                        <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="timeLabel" minWidth="-Infinity" styleClass="muted" text="6:00 PM" />
+                        <Label minWidth="-Infinity" styleClass="muted" text="•" />
+                        <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="locationLabel" minWidth="0.0" styleClass="muted" text="Location" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <ImageView fx:id="arrowIcon" fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+   </children>
+</HBox>

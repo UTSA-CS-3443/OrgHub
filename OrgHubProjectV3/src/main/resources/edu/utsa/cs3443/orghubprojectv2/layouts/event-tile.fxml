@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContentDisplay?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox prefWidth="342.0" styleClass="event-card" stylesheets="@app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.utsa.cs3443.orghubprojectv2.controller.EventTileController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="58.0" styleClass="card-header">
+         <children>
+            <VBox alignment="CENTER" prefHeight="40.0" prefWidth="40.0" styleClass="date-badge">
+               <children>
+                  <Label fx:id="monthLabel" styleClass="date-month" text="APR" />
+                  <Label fx:id="dayLabel" styleClass="date-day" text="8" />
+               </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="typeTagLabel" styleClass="type-tag" text="MEETING" />
+         </children>
+         <padding>
+            <Insets left="16.0" right="16.0" />
+         </padding>
+      </HBox>
+      <VBox spacing="7.0" styleClass="card-body">
+         <children>
+            <Label fx:id="dateLabel" styleClass="card-date" text="APR 8, 2026" />
+            <Label fx:id="titleLabel" styleClass="card-title" text="Event title" wrapText="true" />
+            <Label fx:id="descriptionLabel" maxHeight="48.0" minHeight="48.0" prefHeight="48.0" prefWidth="310.0" styleClass="card-text" text="Description" wrapText="true" />
+            <Separator />
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+               <children>
+                  <Group>
+                     <children>
+                        <SVGPath content="M12 3a9 9 0 1 0 0 18a9 9 0 0 0 0-18zM12 7v5l3 2" scaleX="0.55" scaleY="0.55" styleClass="icon-muted" />
+                     </children>
+                  </Group>
+                  <Label fx:id="timeLabel" styleClass="card-meta" text="6:00 PM" />
+               </children>
+            </HBox>
+            <HBox fx:id="locationBox" alignment="CENTER_LEFT" spacing="8.0">
+               <children>
+                  <Group>
+                     <children>
+                        <SVGPath content="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 7.5a2.5 2.5 0 1 0 0 5a2.5 2.5 0 0 0 0-5z" scaleX="0.55" scaleY="0.55" styleClass="icon-muted" />
+                     </children>
+                  </Group>
+                  <Label fx:id="locationLabel" styleClass="card-meta" text="Location" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="16.0" right="16.0" top="14.0" />
+         </padding>
+      </VBox>
+      <HBox alignment="CENTER_LEFT" spacing="6.0" styleClass="card-footer">
+         <children>
+            <Button fx:id="detailsButton" contentDisplay="RIGHT" graphicTextGap="6.0" mnemonicParsing="false" onAction="#onDetailsClick" styleClass="link-button" text="View details">
+               <graphic>
+                  <Group>
+                     <children>
+                        <SVGPath content="M5 12h14M13 6l6 6-6 6" scaleX="0.5" scaleY="0.5" styleClass="icon" />
+                     </children>
+                  </Group>
+               </graphic>
+            </Button>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#onEditClick" styleClass="icon-button">
+               <graphic>
+                  <Group>
+                     <children>
+                        <SVGPath content="M4 20l1-4L16 5l3 3L8 19l-4 1zM14 7l3 3" scaleX="0.6" scaleY="0.6" styleClass="icon" />
+                     </children>
+                  </Group>
+               </graphic>
+            </Button>
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#onDeleteClick" styleClass="icon-button-danger">
+               <graphic>
+                  <Group>
+                     <children>
+                        <SVGPath content="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6" scaleX="0.6" scaleY="0.6" styleClass="icon" />
+                     </children>
+                  </Group>
+               </graphic>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="16.0" right="12.0" top="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>

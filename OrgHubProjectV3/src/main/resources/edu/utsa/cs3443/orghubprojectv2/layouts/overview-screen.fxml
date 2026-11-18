@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox fx:controller="edu.utsa.cs3443.orghubprojectv2.controller.OverviewScreenController" prefHeight="800.0" prefWidth="1280.0" stylesheets="@app.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+
+      <!-- ============ LEFT: sidebar ============ -->
+      <VBox maxWidth="244.0" minWidth="244.0" prefWidth="244.0" styleClass="sidebar">
+         <padding>
+            <Insets bottom="20.0" left="18.0" right="18.0" top="28.0" />
+         </padding>
+         <children>
+            <!-- Logo row -->
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/orghub-logo-icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="brand-name" text="OrgHub" />
+               </children>
+            </HBox>
+
+            <!-- Navigation -->
+            <VBox spacing="6.0">
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="overviewNavButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="Infinity" mnemonicParsing="false" prefHeight="44.0" styleClass="nav-item, nav-item-active" text="Overview">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="eventsNavButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleEventsNav" prefHeight="44.0" styleClass="nav-item" text="Events">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="membersNavButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="Infinity" mnemonicParsing="false" prefHeight="44.0" styleClass="nav-item" text="Members">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="settingsNavButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="Infinity" mnemonicParsing="false" prefHeight="44.0" styleClass="nav-item" text="Settings">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true" />
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS" />
+
+            <Separator styleClass="sidebar-divider" />
+
+            <!-- Current user -->
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <VBox.margin>
+                  <Insets top="16.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="6.0" right="6.0" />
+               </padding>
+               <children>
+                  <StackPane minHeight="34.0" minWidth="34.0" prefHeight="34.0" prefWidth="34.0" styleClass="avatar">
+                     <children>
+                        <Label fx:id="avatarInitialsLabel" styleClass="avatar-text" text="CV" />
+                     </children>
+                  </StackPane>
+                  <VBox alignment="CENTER_LEFT" spacing="2.0">
+                     <children>
+                        <Label fx:id="userNameLabel" styleClass="user-name" text="Clara Villatoro" />
+                        <Label fx:id="userRoleLabel" styleClass="user-role" text="Organization admin" />
+                     </children>
+                  </VBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="userMenuButton" mnemonicParsing="false" onAction="#handleUserMenu" styleClass="icon-button" text="···" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+
+      <!-- ============ RIGHT: main area ============ -->
+      <VBox styleClass="main-area" HBox.hgrow="ALWAYS">
+         <children>
+
+            <!-- Top bar -->
+            <HBox alignment="CENTER_RIGHT" minHeight="76.0" prefHeight="76.0" styleClass="top-bar">
+               <padding>
+                  <Insets right="48.0" />
+               </padding>
+               <children>
+                  <ComboBox fx:id="organizationSwitcher" prefWidth="260.0" promptText="Select organization" styleClass="org-switcher" />
+               </children>
+            </HBox>
+            <Separator />
+
+            <!-- Scrolling content: grows with however many events exist -->
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="content-scroll" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox styleClass="content">
+                     <padding>
+                        <Insets bottom="40.0" left="32.0" right="40.0" top="16.0" />
+                     </padding>
+                     <children>
+
+                        <!-- Greeting (text is set from the controller) -->
+                        <Label fx:id="eyebrowLabel" styleClass="eyebrow-green" text="ALL ORGANIZATIONS" />
+                        <Label fx:id="greetingLabel" styleClass="page-title" text="Good evening.">
+                           <VBox.margin>
+                              <Insets bottom="6.0" top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label fx:id="summaryLabel" styleClass="subtitle" text="You have no upcoming events." />
+
+                        <Separator>
+                           <VBox.margin>
+                              <Insets bottom="28.0" top="28.0" />
+                           </VBox.margin>
+                        </Separator>
+
+                        <!-- Section header -->
+                        <HBox alignment="BOTTOM_LEFT">
+                           <children>
+                              <VBox spacing="2.0">
+                                 <children>
+                                    <Label styleClass="section-title" text="All upcoming events" />
+                                    <Label styleClass="muted" text="Color-coded by organization" />
+                                 </children>
+                              </VBox>
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Hyperlink fx:id="currentOrgLink" onAction="#handleEventsNav" styleClass="link-bold" text="Current organization">
+                                 <graphic>
+                                    <ImageView fitHeight="14.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic>
+                              </Hyperlink>
+                           </children>
+                        </HBox>
+
+                        <!-- Date groups get added here at runtime (see DateGroup.fxml).
+                             Starts empty; any number of groups is fine. -->
+                        <VBox fx:id="eventsContainer" spacing="18.0">
+                           <VBox.margin>
+                              <Insets top="16.0" />
+                           </VBox.margin>
+                        </VBox>
+
+                        <!-- Empty state: shown when there are no upcoming events.
+                             Controller toggles BOTH visible and managed. -->
+                        <VBox fx:id="emptyState" alignment="CENTER" managed="false" spacing="10.0" styleClass="empty-state" visible="false">
+                           <padding>
+                              <Insets bottom="48.0" top="48.0" />
+                           </padding>
+                           <children>
+                              <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label styleClass="empty-title" text="No upcoming events yet" />
+                              <Label styleClass="muted" text="Events created by your organizations will show up here." textAlignment="CENTER" wrapText="true" />
+                              <Button fx:id="createEventButton" mnemonicParsing="false" onAction="#handleEventsNav" prefHeight="40.0" styleClass="primary-button" text="Create an event">
+                                 <VBox.margin>
+                                    <Insets top="8.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</HBox>

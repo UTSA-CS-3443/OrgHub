@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane prefHeight="760.0" prefWidth="1180.0" styleClass="app-root" stylesheets="@app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.utsa.cs3443.orghubprojectv2.controller.ShellController">
+   <left>
+      <VBox prefWidth="210.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="logo-row">
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/orghub-logo-icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="logo-text" text="OrgHub" />
+               </children>
+            </HBox>
+            <VBox spacing="4.0" styleClass="nav-box">
+               <children>
+                  <Button fx:id="overviewButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onOverviewClick" styleClass="nav-item" text="Overview">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <SVGPath content="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z" scaleX="0.7" scaleY="0.7" styleClass="icon" />
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="eventsButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="nav-item, nav-item-active" text="Events">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <SVGPath content="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4" scaleX="0.7" scaleY="0.7" styleClass="icon" />
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="membersButton" alignment="CENTER_LEFT" disable="true" graphicTextGap="12.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="nav-item" text="Members">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <SVGPath content="M9 11a3 3 0 1 0 0-6a3 3 0 0 0 0 6zM3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M17 11a2.5 2.5 0 1 0 0-5M17 14c2.5 0 4 2 4 4.5" scaleX="0.7" scaleY="0.7" styleClass="icon" />
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="settingsButton" alignment="CENTER_LEFT" disable="true" graphicTextGap="12.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="nav-item" text="Settings">
+                     <graphic>
+                        <Group>
+                           <children>
+                              <SVGPath content="M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6zM12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1" scaleX="0.7" scaleY="0.7" styleClass="icon" />
+                           </children>
+                        </Group>
+                     </graphic>
+                  </Button>
+               </children>
+               <padding>
+                  <Insets left="8.0" right="8.0" top="12.0" />
+               </padding>
+            </VBox>
+            <Region VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="user-chip">
+               <children>
+                  <StackPane>
+                     <children>
+                        <Circle radius="15.0" styleClass="avatar-circle" />
+                        <Label fx:id="userInitialsLabel" styleClass="avatar-text" text="?" />
+                     </children>
+                  </StackPane>
+                  <VBox spacing="1.0">
+                     <children>
+                        <Label fx:id="userNameLabel" styleClass="user-name" text="Guest" />
+                        <Label fx:id="userRoleLabel" styleClass="user-role" text="View only" />
+                     </children>
+                  </VBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="userMenuButton" mnemonicParsing="false" onAction="#onUserMenuClick" styleClass="icon-button" text="&#183;&#183;&#183;" />
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="12.0" top="14.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <top>
+            <HBox alignment="CENTER_RIGHT" prefHeight="48.0" styleClass="topbar" BorderPane.alignment="CENTER">
+               <children>
+                  <ComboBox fx:id="organizationComboBox" prefWidth="250.0" styleClass="org-combo" />
+               </children>
+               <padding>
+                  <Insets left="24.0" right="24.0" />
+               </padding>
+            </HBox>
+         </top>
+         <center>
+            <fx:include fx:id="eventsView" source="events-view.fxml" />
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
