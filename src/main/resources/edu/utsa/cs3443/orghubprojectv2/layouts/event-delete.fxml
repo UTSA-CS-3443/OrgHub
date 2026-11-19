@@ -17,17 +17,17 @@
                         <Image url="@../images/orghub-delete-trashcan.png" />
                      </image>
                   </ImageView>
-                  <Label alignment="CENTER" prefHeight="67.0" prefWidth="224.0" styleClass="card-title" text="Delete This Event?" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="titleLabel" alignment="CENTER" prefHeight="67.0" prefWidth="224.0" styleClass="card-title" text="Delete This Event?" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label prefHeight="43.0" prefWidth="306.0" styleClass="card-text" text="{Meeting Name} will be permenantly removed. Are you sure you want to remove this event?" textAlignment="CENTER" wrapText="true" />
+                  <Label fx:id="questionDeleteLabel" prefHeight="43.0" prefWidth="306.0" styleClass="card-text" text="{Meeting Name} will be permanently removed. Are you sure you want to remove this event?" textAlignment="CENTER" wrapText="true" />
                   <Separator prefHeight="46.0" prefWidth="494.0" />
                   <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button cancelButton="true" mnemonicParsing="false" styleClass="secondary-button" text="Keep Event" />
-                        <Button defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" styleClass="primary-button" text="Yes, Delete Event." />
+                        <Button fx:id="keepEventButton" cancelButton="true" mnemonicParsing="false" onAction="#keepEventOnClick" styleClass="secondary-button" text="Keep Event" />
+                        <Button fx:id="deleteEventButton" defaultButton="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteEventOnClick" styleClass="primary-button" text="Yes, Delete Event." />
                      </children>
                   </HBox>
                </children>

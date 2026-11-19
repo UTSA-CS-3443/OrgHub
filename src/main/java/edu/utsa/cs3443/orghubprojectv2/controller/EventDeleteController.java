@@ -1,8 +1,10 @@
 package edu.utsa.cs3443.orghubprojectv2.controller;
 
+import edu.utsa.cs3443.orghubprojectv2.model.Event;
 import edu.utsa.cs3443.orghubprojectv2.model.EventManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -22,6 +24,11 @@ public class EventDeleteController {
         this.eventManager = eventManager;
         this.id = id;
         this.orgId = orgId;
+        Event event = eventManager.findById(id, orgId);
+        if (event != null) {
+            questionDeleteLabel.setText(event.getTitle()
+                    + " will be permanently removed. Are you sure?");
+        }
     }
 
     @FXML

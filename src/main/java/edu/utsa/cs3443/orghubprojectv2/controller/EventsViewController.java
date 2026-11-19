@@ -6,6 +6,7 @@ import edu.utsa.cs3443.orghubprojectv2.model.Organization;
 import edu.utsa.cs3443.orghubprojectv2.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -175,15 +176,15 @@ public class EventsViewController {
         if (!canManage()) {
             return;
         }
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                "Delete \"" + event.getTitle() + "\"? This cannot be undone.", ButtonType.OK, ButtonType.CANCEL);
-        alert.setHeaderText("Delete event");
-        Optional<ButtonType> choice = alert.showAndWait();
-        if (choice.isPresent() && choice.get() == ButtonType.OK) {
-            if (!eventManager.deleteEvent(event.getId(), event.getOrgId())) {
-                showError("That event could not be found.");
-            }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(LAYOUTS + "event-delete.fxml"));
+            Parent root = loader.load();
+            EventDeleteController controller = loader.getController();
+            controller.setup(eventManager, event.getId(), event.getOrgId());
+            openDialog("Delete event", root);
             refresh();
+        } catch (IOException | RuntimeException e) {
+            showError("The delete confirmation could not be opened.");
         }
     }
 
