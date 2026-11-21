@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="800.0" prefWidth="1280.0" styleClass="app-root" stylesheets="@app.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.utsa.cs3443.orghubprojectv2.controller.ShellController">
+   <left>
+      <VBox maxWidth="244.0" minWidth="244.0" prefWidth="244.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="18.0" right="18.0" top="28.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <children>
+                  <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/orghub-logo-icon.png" />
+                     </image>
+                  </ImageView>
+                  <Label styleClass="brand-name" text="OrgHub" />
+               </children>
+            </HBox>
+            <VBox spacing="6.0">
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+               <children>
+                  <Button fx:id="overviewButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onOverviewClick" prefHeight="44.0" styleClass="nav-item" text="Overview">
+                     <graphic>
+                        <ImageView fitHeight="14.4" fitWidth="14.4" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icon-overview.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="eventsButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEventsClick" prefHeight="44.0" styleClass="nav-item, nav-item-active" text="Events">
+                     <graphic>
+                        <ImageView fitHeight="14.4" fitWidth="14.4" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icon-events.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="settingsButton" alignment="CENTER_LEFT" graphicTextGap="12.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onSettingsClick" prefHeight="44.0" styleClass="nav-item" text="Settings">
+                     <graphic>
+                        <ImageView fitHeight="14.4" fitWidth="14.4" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/icon-settings.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <Region VBox.vgrow="ALWAYS" />
+            <Separator styleClass="sidebar-divider" />
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+               <VBox.margin>
+                  <Insets top="16.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="6.0" right="6.0" />
+               </padding>
+               <children>
+                  <StackPane minHeight="34.0" minWidth="34.0" prefHeight="34.0" prefWidth="34.0" styleClass="avatar">
+                     <children>
+                        <Label fx:id="userInitialsLabel" styleClass="avatar-text" text="?" />
+                     </children>
+                  </StackPane>
+                  <VBox alignment="CENTER_LEFT" spacing="2.0">
+                     <children>
+                        <Label fx:id="userNameLabel" styleClass="user-name" text="Guest" />
+                        <Label fx:id="userRoleLabel" styleClass="user-role" text="View only" />
+                     </children>
+                  </VBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="userMenuButton" mnemonicParsing="false" onAction="#onUserMenuClick" styleClass="icon-button" text="&#183;&#183;&#183;" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <BorderPane BorderPane.alignment="CENTER">
+         <top>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" minHeight="76.0" prefHeight="76.0" styleClass="top-bar">
+                     <children>
+                        <ComboBox fx:id="organizationComboBox" prefWidth="260.0" promptText="Select organization" styleClass="org-switcher" />
+                     </children>
+                     <padding>
+                        <Insets right="48.0" />
+                     </padding>
+                  </HBox>
+                  <Separator />
+               </children>
+            </VBox>
+         </top>
+         <center>
+            <StackPane>
+               <children>
+                  <fx:include fx:id="eventsView" source="events-view.fxml" />
+                  <fx:include fx:id="settingsView" source="settings-view.fxml" />
+               </children>
+            </StackPane>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>
