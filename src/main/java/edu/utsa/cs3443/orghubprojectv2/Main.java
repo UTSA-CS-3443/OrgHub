@@ -25,7 +25,7 @@ public class Main {
         EventManager events  = new EventManager(fileHandler);
 
         MemberManager members = new MemberManager(new MemberFileHandler("data/members.csv"));
-        OrganizationManager orgs = new OrganizationManager("data/orginizations.txt");
+        OrganizationManager orgs = new OrganizationManager("data/orginizations.csv");
 
         LoginController ui = new LoginController(events, members, orgs);
         ui.run();
