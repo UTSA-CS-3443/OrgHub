@@ -51,7 +51,7 @@ public class OrgHubApp extends Application {
         }
         eventManager = new EventManager(new EventFileHandler("data/events.csv"));
         memberManager = new MemberManager(new MemberFileHandler("data/members.csv"));
-        orgManager = new OrganizationManager("data/orginizations.txt");
+        orgManager = new OrganizationManager("data/orginizations.csv");
 
         stage = primaryStage;
         stage.setTitle("OrgHub - Student Organization Management");
